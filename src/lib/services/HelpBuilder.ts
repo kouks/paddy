@@ -1,3 +1,4 @@
+import { colors } from '@/assets/colors'
 import { MessageEmbed } from 'discord.js'
 import { CommandTemplate } from './types'
 import { CommandBag } from './CommandBag'
@@ -19,7 +20,7 @@ export class HelpBuilder {
    */
   public buildSummary () : MessageEmbed {
     const embed: MessageEmbed = new MessageEmbed()
-      .setColor('#e37682')
+      .setColor(colors.primary)
       .setTitle('Paddy Help')
       .setDescription(`Type \`${this.primaryTrigger}help [command]\` to get a detailed command summary.`)
 
@@ -45,12 +46,13 @@ export class HelpBuilder {
   public buildForCommand (command: CommandTemplate) : MessageEmbed {
     if (command === undefined || command.hidden) {
       return new MessageEmbed()
-        .setColor('#e37682')
-        .setTitle('Command not found.')
+        .setColor(colors.red)
+        .setTitle('Error')
+        .setDescription('Command not found.')
     }
 
     const embed: MessageEmbed = new MessageEmbed()
-      .setColor('#e37682')
+      .setColor(colors.primary)
       .setTitle('Command Structure')
       .setDescription(command.description)
 

@@ -1,3 +1,4 @@
+import { colors } from '@/assets/colors'
 import { Class, Container } from '@exteranto/core'
 import { CommandTemplate } from '../services/types'
 import { CommandBag } from '../services/CommandBag'
@@ -41,7 +42,14 @@ export function OnMessage<T extends MessageListener> (template: CommandTemplate)
         const parameters: any = commandParser.parse(template, event.content)
 
         new Constructor().handle(event, parameters)
-          .catch((e: Error) => event.channel.send(e.message, parameters))
+          .catch((e) => {
+            const embed: MessageEmbed = new MessageEmbed()
+              .setColor(colors.red)
+              .setTitle('Error')
+              .setDescription(e.message)
+
+            event.channel.send(embed)
+          })
       } catch (e) {
         if (e instanceof ParameterMissingException) {
           const embded: MessageEmbed = helpBuilder.buildForCommand(CommandBag.find(e.matchedTrigger))

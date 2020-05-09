@@ -1,4 +1,5 @@
 import { Param } from '@exteranto/core'
+import { colors } from '@/assets/colors'
 import { JoinablesConfiguration } from './types'
 import { Message, MessageEmbed, TextChannel } from 'discord.js'
 import { OnMessage, MessageListener, Needs } from '@/lib/listeners/Message'
@@ -32,7 +33,7 @@ export class CreatesInitialEmbeds implements MessageListener {
       const emojis: string[] = Object.keys(rule.mapping)
 
       const embed: MessageEmbed = new MessageEmbed()
-        .setColor('#e37682')
+        .setColor(colors.primary)
         .setTitle('React to obtain roles')
 
       const description: string = emojis.map((emoji) => {

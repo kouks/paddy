@@ -49,7 +49,7 @@ export class FindsDisposition implements MessageListener {
 
     // Send the embed and delete the message that was sent.
     await message.channel.send(
-      weaponDispositionResponse(weaponInfo),
+      weaponDispositionResponse(message.member, weaponInfo),
     )
 
     return void message.delete()
