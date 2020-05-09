@@ -16,7 +16,6 @@ npm install
 To run the application, you need to create a `.env` file in the root directory
 and provide some required environment variables:
 
-`.env`
 ```
 DISCORD_BOT_TOKEN=<your_development_token>
 PRIMARY_COMMAND_TRIGGER=~
