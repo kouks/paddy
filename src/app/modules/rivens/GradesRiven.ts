@@ -67,7 +67,8 @@ export class GradesRiven implements MessageListener {
 
     const attachment: MessageAttachment = message.attachments.first()
 
-    // Reject if no attachment, multiple attachments or if attachment is not an image.
+    // Reject if no attachment, multiple attachments or if attachment is not an
+    // image.
     if (attachment === undefined || !/(\.jpg|\.png$)/.test(attachment.name)) {
       throw new InvalidArgumentException('Please attach an image to the message.')
     }

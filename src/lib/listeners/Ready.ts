@@ -12,8 +12,8 @@ export interface ReadyListener {
 }
 
 /**
- * The @Message annotation serves to mark a class as a listener to the
- * message discord event.
+ * The @OnReady annotation serves to mark a class as a listener to the ready
+ * discord event.
  *
  * @return The annotation
  */

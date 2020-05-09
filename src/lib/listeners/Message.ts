@@ -21,8 +21,8 @@ export interface MessageListener {
 }
 
 /**
- * The @OnMessage annotation serves to mark a class as a listener to the
- * message discord event.
+ * The @OnMessage annotation serves to mark a class as a listener to the message
+ * discord event.
  *
  * @param template The message command template
  * @return The annotation
