@@ -5,6 +5,8 @@ import { InvalidDateException } from './exceptions'
 import { SavesBirthdayParameters } from './types'
 import { OnMessage, MessageListener } from 'lib/listeners/Message'
 import * as dayjs from 'dayjs'
+import { saveBirthdayToDatabase } from './queries'
+import { DatabaseException } from 'exceptions'
 
 @OnMessage<SavesBirthday>({
   triggers: ['bday', 'birthday'],
@@ -34,8 +36,10 @@ export class SavesBirthday implements MessageListener {
       throw new InvalidDateException()
     }
 
-    // Save to DB?
-    // ...
+    // Save to database.
+    await saveBirthdayToDatabase(message.member.id, date.date(), date.month()).catch(() => {
+      throw new DatabaseException('Something went wrong when saving your data.')
+    })
 
     // Send the embed and delete the message that was sent.
     await message.channel.send(birthdaySavedResponse(message.member, date.format(this.dateFormat)))

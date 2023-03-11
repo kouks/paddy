@@ -22,6 +22,9 @@ coverage/
 # Environment
 .env
 
+# Database
+database
+
 # Misc
 all.sh
 artifacts

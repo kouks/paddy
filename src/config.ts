@@ -1,8 +1,14 @@
 import { Method, Awi } from 'awi'
+import * as sqlite3 from 'sqlite3'
 
 export default {
   auth: {
     discordToken: process.env.DISCORD_BOT_TOKEN,
+  },
+
+  database: {
+    filename: String(process.env.DATABASE_FILENAME),
+    driver: sqlite3.cached.Database,
   },
 
   events: {

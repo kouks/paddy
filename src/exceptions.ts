@@ -13,3 +13,12 @@ export class InvalidArgumentException extends PaddyException {
     super(message)
   }
 }
+
+export class DatabaseException extends PaddyException {
+  /**
+   * {@inheritdoc}
+   */
+  public constructor(message: string) {
+    super(message)
+  }
+}

@@ -10,6 +10,27 @@ loadEnvironment()
 
 /**
  *
+ * Register database.
+ *
+ */
+
+import * as sqlite3 from 'sqlite3'
+import { openDatabase } from './database'
+
+if (process.env.APPLICATION_ENVIRONMENT === 'dev') {
+  sqlite3.verbose()
+}
+
+openDatabase().then((db) => {
+  if (process.env.APPLICATION_ENVIRONMENT === 'dev') {
+    db.on('trace', console.log)
+  }
+
+  db.migrate()
+})
+
+/**
+ *
  * Register container.
  *
  */
