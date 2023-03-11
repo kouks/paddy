@@ -4,7 +4,6 @@ import { CommandNotMatchedException, ParameterMissingException } from './excepti
 
 @Singleton
 export class CommandParser {
-
   /**
    * The primary command trigger.
    */
@@ -18,9 +17,10 @@ export class CommandParser {
    * @param message The message to be parsed
    * @return The parsed object
    */
-  public parse (template: CommandTemplate, message: string) : any {
-    const matchedTrigger: string = template.triggers
-      .find(t => new RegExp(`^\\${this.primaryTrigger}${t}(\\s|$)`).test(message))
+  public parse(template: CommandTemplate, message: string): any {
+    const matchedTrigger: string = template.triggers.find((t) =>
+      new RegExp(`^\\${this.primaryTrigger}${t}(\\s|$)`).test(message)
+    )
 
     if (matchedTrigger === undefined) {
       throw new CommandNotMatchedException()
@@ -30,9 +30,11 @@ export class CommandParser {
       .replace(new RegExp(`^${this.primaryTrigger}${matchedTrigger}(\\s|$)`), '')
       .replace(/\s+/g, ' ')
 
-    const parametersRegex: string = (template.parameters || []).map((p) => {
-      return `(?<${p.name}>${p.matches})${p.optional ? '?' : ''}`
-    }).join(' ?')
+    const parametersRegex: string = (template.parameters || [])
+      .map((p) => {
+        return `(?<${p.name}>${p.matches})${p.optional ? '?' : ''}`
+      })
+      .join(' ?')
 
     const parametersMatch: RegExpMatchArray = parseable.match(new RegExp(`^${parametersRegex}`))
 
@@ -51,5 +53,4 @@ export class CommandParser {
 
     return { ...parameters, options }
   }
-
 }

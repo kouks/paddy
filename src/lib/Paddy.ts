@@ -1,9 +1,8 @@
 import { Client } from 'discord.js'
 import { BootConfiguration } from './types'
-import { Autowired, Param, With } from '@exteranto/core'
+import { With } from '@exteranto/core'
 
 export class Paddy {
-
   /**
    * The discord client.
    */
@@ -15,8 +14,7 @@ export class Paddy {
    *
    * @param config The boot configuration
    */
-  public async rise (config: BootConfiguration) : Promise<void> {
+  public async rise(config: BootConfiguration): Promise<void> {
     this.discord.login(config.token)
   }
-
 }

@@ -1,6 +1,4 @@
-
 export interface JoinablesConfiguration {
-
   /**
    * The joinables channel ID.
    */
@@ -10,11 +8,9 @@ export interface JoinablesConfiguration {
    * The joinables ruleset.
    */
   rules: RuleSet[]
-
 }
 
 export interface RuleSet {
-
   /**
    * The message ID.
    */
@@ -24,5 +20,4 @@ export interface RuleSet {
    * The role to reaction mapping.
    */
   mapping: { [key: string]: string }
-
 }

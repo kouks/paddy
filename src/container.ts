@@ -12,5 +12,4 @@ export const bootContainer: () => void = () => {
 
   // Service bindings.
   container.bind(Client).to(Client).asSingleton()
-
 }

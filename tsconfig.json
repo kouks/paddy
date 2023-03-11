@@ -1,22 +1,27 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "declaration": true,
     "declarationDir": "types",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "commonjs",
+    "lib": ["es6"],
     "noImplicitThis": true,
+    "noImplicitAny": true,
     "outDir": "dist",
     "removeComments": true,
+    "resolveJsonModule": true,
+    "rootDir": "src",
     "sourceMap": true,
-    "target": "es6",
+    "target": "es5",
     "paths": {
-      "@/*": ["*"]
-    }
+      "assets/*": ["src/assets/*"],
+      "app/*": ["src/app*"],
+      "lib/*": ["src/lib/*"],
+      "exceptions": ["src/exceptions"]
+    },
+    "plugins": [{ "transform": "ts-transform-paths" }]
   },
-  "include": [
-    "src/**/*",
-    "test/**/*"
-  ]
+  "include": ["src"]
 }

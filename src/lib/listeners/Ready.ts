@@ -3,12 +3,10 @@ import { ClassAnnotation } from '../types'
 import { Class, Container } from '@exteranto/core'
 
 export interface ReadyListener {
-
   /**
    * Ready event handler.
    */
-  handle (discord: Client) : Promise<void>
-
+  handle(discord: Client): Promise<void>
 }
 
 /**
@@ -17,8 +15,7 @@ export interface ReadyListener {
  *
  * @return The annotation
  */
-export function OnReady<T extends ReadyListener> () : ClassAnnotation<T> {
-
+export function OnReady<T extends ReadyListener>(): ClassAnnotation<T> {
   return (Constructor: Class<T>) => {
     const container: Container = Container.getInstance()
     const discord: Client = container.resolve(Client)

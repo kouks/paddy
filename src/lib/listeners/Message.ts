@@ -1,23 +1,21 @@
-import { colors } from '@/assets/colors'
+import { colors } from 'assets/colors'
 import { Class, Container } from '@exteranto/core'
 import { CommandTemplate } from '../services/types'
 import { CommandBag } from '../services/CommandBag'
 import { HelpBuilder } from '../services/HelpBuilder'
 import { CommandParser } from '../services/CommandParser'
 import { ClassAnnotation, MethodAnnotation } from '../types'
-import { ParameterMissingException } from '@/lib/services/exceptions'
+import { ParameterMissingException } from 'lib/services/exceptions'
 import { Client, Message, MessageEmbed, PermissionResolvable } from 'discord.js'
 
 export interface MessageListener {
-
   /**
    * Message event handler.
    *
    * @param event The event to be handled
    * @param parameters The parameters provided to the message
    */
-  handle (event: Message, parameters: any) : Promise<void>
-
+  handle(event: Message, parameters: any): Promise<void>
 }
 
 /**
@@ -27,7 +25,7 @@ export interface MessageListener {
  * @param template The message command template
  * @return The annotation
  */
-export function OnMessage<T extends MessageListener> (template: CommandTemplate) : ClassAnnotation<T> {
+export function OnMessage<T extends MessageListener>(template: CommandTemplate): ClassAnnotation<T> {
   CommandBag.add(template)
 
   return (Constructor: Class<T>) => {
@@ -41,22 +39,20 @@ export function OnMessage<T extends MessageListener> (template: CommandTemplate)
       try {
         const parameters: any = commandParser.parse(template, event.content)
 
-        new Constructor().handle(event, parameters)
-          .catch((e) => {
-            const embed: MessageEmbed = new MessageEmbed()
-              .setColor(colors.red)
-              .setTitle('Error')
-              .setDescription(e.message)
+        new Constructor().handle(event, parameters).catch((e) => {
+          const embed: MessageEmbed = new MessageEmbed()
+            .setColor(colors.red)
+            .setTitle('Error')
+            .setDescription(e.message)
 
-            event.channel.send(embed)
-          })
+          event.channel.send(embed)
+        })
       } catch (e) {
         if (e instanceof ParameterMissingException) {
           const embded: MessageEmbed = helpBuilder.buildForCommand(CommandBag.find(e.matchedTrigger))
 
           event.channel.send(embded)
         }
-
       }
     })
 
@@ -64,20 +60,19 @@ export function OnMessage<T extends MessageListener> (template: CommandTemplate)
   }
 }
 
-
 /**
- * The @Needs annotation checks user permissions to access a give function.
+ * The @Needs annotation checks user permissions to access a given function.
  *
  * @param permissions The array of permissions needed.
  * @return The annotation
  */
-export function Needs (permissions: PermissionResolvable[]) : MethodAnnotation {
+export function Needs(permissions: PermissionResolvable[]): MethodAnnotation {
   return (target, method, descriptor) => {
     descriptor.value = new Proxy(target[method], {
       apply: (callable, scope, args) => {
         const message: Message = args[0]
 
-        if (!permissions.every(p => message.member.hasPermission(p))) {
+        if (!permissions.every((p) => message.member.hasPermission(p))) {
           return
         }
 

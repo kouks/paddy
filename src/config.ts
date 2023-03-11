@@ -1,7 +1,6 @@
 import { Method, Awi } from 'awi'
 
 export default {
-
   auth: {
     discordToken: process.env.DISCORD_BOT_TOKEN,
   },
@@ -14,6 +13,7 @@ export default {
 
   bot: {
     version: '1.1.1',
+    name: 'Quack',
   },
 
   modules: {
@@ -42,20 +42,25 @@ export default {
           },
           messageId: '708795740511797298',
         },
-      ]
+      ],
     },
 
     rivens: {
-      rivenGradingApiClient: (imageUrl: string, rank: number) => new Awi()
-        .use(async req => req.base = `${process.env.API_GATEWAY_URL}/rivens/grade`)
-        .use(async req => req.body = { imageUrl, rank })
-        .use(async req => req.method = Method.POST),
+      rivenGradingApiClient: (imageUrl: string, rank: number) =>
+        new Awi()
+          .use(async (req) => (req.base = `${process.env.API_GATEWAY_URL}/rivens/grade`))
+          .use(async (req) => (req.body = { imageUrl, rank }))
+          .use(async (req) => (req.method = Method.POST)),
 
-      weaponInfoApiClient: (weaponName: string) => new Awi()
-        .use(async req => req.base = `${process.env.API_GATEWAY_URL}/rivens/disposition`)
-        .use(async req => req.body = { weaponName })
-        .use(async req => req.method = Method.POST),
+      weaponInfoApiClient: (weaponName: string) =>
+        new Awi()
+          .use(async (req) => (req.base = `${process.env.API_GATEWAY_URL}/rivens/disposition`))
+          .use(async (req) => (req.body = { weaponName }))
+          .use(async (req) => (req.method = Method.POST)),
+    },
+
+    birthdays: {
+      dateFormat: 'D MMM',
     },
   },
-
 }

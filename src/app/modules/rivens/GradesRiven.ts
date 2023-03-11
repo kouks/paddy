@@ -2,10 +2,10 @@ import { Client } from 'awi'
 import { Param } from '@exteranto/core'
 import { gradedRivenResponse } from './templates'
 import { Message, MessageAttachment } from 'discord.js'
-import { InvalidArgumentException } from '@/exceptions'
+import { InvalidArgumentException } from 'exceptions'
 import { RivenGradingFailedException } from './exceptions'
 import { GradedRiven, GradesRivenParameters, Grade } from './types'
-import { OnMessage, MessageListener } from '@/lib/listeners/Message'
+import { OnMessage, MessageListener } from 'lib/listeners/Message'
 
 @OnMessage<GradesRiven>({
   triggers: ['g', 'grade'],
@@ -27,7 +27,6 @@ import { OnMessage, MessageListener } from '@/lib/listeners/Message'
   ],
 })
 export class GradesRiven implements MessageListener {
-
   /**
    * The riven grading API url.
    */
@@ -37,18 +36,16 @@ export class GradesRiven implements MessageListener {
   /**
    * {@inheritdoc}
    */
-  public async handle (message: Message, parameters: GradesRivenParameters) : Promise<void> {
+  public async handle(message: Message, parameters: GradesRivenParameters): Promise<void> {
     const imageUrl: string = this.getImageUrl(message, parameters)
 
     // Uses the riven grader api client to grade a riven from image.
     const gradedRiven: GradedRiven = await this.rivenGradingApiClient(imageUrl, parameters.options.rank)
       .optional<GradedRiven>()
-      .then(bag => bag.expect(new RivenGradingFailedException))
+      .then((bag) => bag.expect(new RivenGradingFailedException()))
 
     // Send the embed and delete the message that was sent.
-    await message.channel.send(
-      gradedRivenResponse(message.member, gradedRiven, imageUrl),
-    )
+    await message.channel.send(gradedRivenResponse(message.member, gradedRiven, imageUrl))
 
     return void message.delete()
   }
@@ -60,7 +57,7 @@ export class GradesRiven implements MessageListener {
    * @param parameters The message parameters
    * @return The image URl
    */
-  private getImageUrl (message: Message, parameters: GradesRivenParameters) : string {
+  private getImageUrl(message: Message, parameters: GradesRivenParameters): string {
     if (parameters.options.url) {
       return parameters.options.url
     }
@@ -75,5 +72,4 @@ export class GradesRiven implements MessageListener {
 
     return attachment.url
   }
-
 }

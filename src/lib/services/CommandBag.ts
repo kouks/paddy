@@ -1,7 +1,6 @@
 import { CommandTemplate } from './types'
 
 export class CommandBag {
-
   /**
    * All command templates stored.
    */
@@ -12,7 +11,7 @@ export class CommandBag {
    *
    * @param command The command to be added
    */
-  public static add (command: CommandTemplate) : void {
+  public static add(command: CommandTemplate): void {
     this.commands.push(command)
   }
 
@@ -22,8 +21,8 @@ export class CommandBag {
    * @param trigger The trigger to look for
    * @return The command template
    */
-  public static find (trigger: string) : CommandTemplate {
-    return this.commands.find(c => c.triggers.includes(trigger))
+  public static find(trigger: string): CommandTemplate {
+    return this.commands.find((c) => c.triggers.includes(trigger))
   }
 
   /**
@@ -31,8 +30,7 @@ export class CommandBag {
    *
    * @return The command templates
    */
-  public static all () : CommandTemplate[] {
+  public static all(): CommandTemplate[] {
     return this.commands
   }
-
 }

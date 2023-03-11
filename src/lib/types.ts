@@ -1,12 +1,10 @@
 import { Class } from '@exteranto/core'
 
 export interface BootConfiguration {
-
   /**
    * The Discord auth token.
    */
   token: string
-
 }
 
 /**

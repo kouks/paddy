@@ -2,10 +2,10 @@ import { Client } from 'awi'
 import { Message } from 'discord.js'
 import { Param } from '@exteranto/core'
 import { weaponDispositionResponse } from './templates'
-import { InvalidArgumentException } from '@/exceptions'
+import { InvalidArgumentException } from 'exceptions'
 import { WeaponInfoLookupFailedException } from './exceptions'
 import { FindsDispositionParameters, WeaponInfo } from './types'
-import { OnMessage, MessageListener } from '@/lib/listeners/Message'
+import { OnMessage, MessageListener } from 'lib/listeners/Message'
 
 @OnMessage<FindsDisposition>({
   triggers: ['d', 'dispo'],
@@ -20,7 +20,6 @@ import { OnMessage, MessageListener } from '@/lib/listeners/Message'
   ],
 })
 export class FindsDisposition implements MessageListener {
-
   /**
    *
    * @param message
@@ -32,8 +31,7 @@ export class FindsDisposition implements MessageListener {
   /**
    * {@inheritdoc}
    */
-  public async handle (message: Message, parameters: FindsDispositionParameters) : Promise<void> {
-
+  public async handle(message: Message, parameters: FindsDispositionParameters): Promise<void> {
     // Get the weapon name.
     const weaponName: string = parameters.weapon
 
@@ -45,14 +43,11 @@ export class FindsDisposition implements MessageListener {
     // Use the weapon info API client to find weapon disposition.
     const weaponInfo: WeaponInfo = await this.weaponInfoApiClient(weaponName)
       .optional<WeaponInfo>()
-      .then(box => box.expect(new WeaponInfoLookupFailedException))
+      .then((box) => box.expect(new WeaponInfoLookupFailedException()))
 
     // Send the embed and delete the message that was sent.
-    await message.channel.send(
-      weaponDispositionResponse(message.member, weaponInfo),
-    )
+    await message.channel.send(weaponDispositionResponse(message.member, weaponInfo))
 
     return void message.delete()
   }
-
 }

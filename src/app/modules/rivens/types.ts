@@ -1,23 +1,19 @@
-
 export interface GradedRiven {
-
   /**
    * The weapon info.
    */
   weapon: {
-    name: string,
-    disposition: number,
+    name: string
+    disposition: number
   }
 
   /**
    * The array of grades.
    */
   grades: Grade[]
-
 }
 
 export interface Grade {
-
   /**
    * The stat name.
    */
@@ -42,23 +38,19 @@ export interface Grade {
    * The grade rating.
    */
   rating: string
-
 }
 
 export interface GradesRivenParameters {
-
   /**
    * The options object.
    */
   options: {
-    rank?: number,
-    url?: string,
+    rank?: number
+    url?: string
   }
-
 }
 
 export interface WeaponInfo {
-
   /**
    * The weapon name.
    */
@@ -73,14 +65,11 @@ export interface WeaponInfo {
    * The weapon texture URL partial.
    */
   texture: string
-
 }
 
 export interface FindsDispositionParameters {
-
   /**
    * The weapon name.
    */
   weapon: string
-
 }

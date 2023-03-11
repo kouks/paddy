@@ -1,6 +1,4 @@
-
 export interface CommandTemplate {
-
   /**
    * The command trigger.
    */
@@ -30,11 +28,9 @@ export interface CommandTemplate {
    * The command options.
    */
   options?: Option[]
-
 }
 
 export interface Parameter {
-
   /**
    * The parameter name.
    */
@@ -54,11 +50,9 @@ export interface Parameter {
    * Whether the parameter is optional.
    */
   optional?: boolean
-
 }
 
 export interface Option {
-
   /**
    * The option name.
    */
@@ -78,5 +72,4 @@ export interface Option {
    * The option descrption.
    */
   description: string
-
 }

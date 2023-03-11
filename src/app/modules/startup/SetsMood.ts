@@ -1,10 +1,9 @@
 import { Client } from 'discord.js'
 import { Param } from '@exteranto/core'
-import { OnReady, ReadyListener } from '@/lib/listeners/Ready'
+import { OnReady, ReadyListener } from 'lib/listeners/Ready'
 
 @OnReady<SetsMood>()
 export class SetsMood implements ReadyListener {
-
   /**
    * The bot version.
    */
@@ -14,9 +13,8 @@ export class SetsMood implements ReadyListener {
   /**
    * {@inheritdoc}
    */
-  public async handle (discord: Client) : Promise<void> {
+  public async handle(discord: Client): Promise<void> {
     discord.user.setActivity(`.help [v${this.version}]`, { type: 'STREAMING' })
     discord.user.setStatus('online')
   }
-
 }
