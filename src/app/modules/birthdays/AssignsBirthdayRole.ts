@@ -14,7 +14,7 @@ export class AssignsBirthdayRole {
   @Autowired
   private static discord: Client
 
-  @Cron('* */5 * * * *')
+  @Cron('0 */5 * * * *')
   public static async handle(): Promise<void> {
     const today = dayjs()
     const [day, month] = [today.date(), today.month()]

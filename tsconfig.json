@@ -17,6 +17,7 @@
     "target": "es5",
     "paths": {
       "assets/*": ["src/assets/*"],
+      "helpers/*": ["src/helpers/*"],
       "app/*": ["src/app*"],
       "lib/*": ["src/lib/*"],
       "exceptions": ["src/exceptions"],

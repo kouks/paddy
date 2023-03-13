@@ -8,7 +8,7 @@ export class SetsMood implements ReadyListener {
   private version: string
 
   public async handle(discord: Client): Promise<void> {
-    await discord.user.setActivity(`.help [v${this.version}]`, { type: 'STREAMING' })
+    await discord.user.setActivity(`.help [v${this.version}]`, { type: 'PLAYING' })
     await discord.user.setStatus('online')
   }
 }

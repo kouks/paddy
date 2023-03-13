@@ -7,6 +7,7 @@ import { CommandParser } from '../services/CommandParser'
 import { ClassAnnotation, MethodAnnotation } from '../types'
 import { ParameterMissingException } from 'lib/services/exceptions'
 import { Client, Message, MessageEmbed, PermissionResolvable } from 'discord.js'
+import { isHelpableException } from 'helpers/exceptions'
 
 export interface MessageListener {
   handle(event: Message, parameters: any): Promise<void>
@@ -34,8 +35,8 @@ export function OnMessage<T extends MessageListener>(template: CommandTemplate):
 
           event.channel.send(embed)
         })
-      } catch (e) {
-        if (e instanceof ParameterMissingException) {
+      } catch (e: unknown) {
+        if (isHelpableException(e)) {
           const embded: MessageEmbed = helpBuilder.buildForCommand(CommandBag.find(e.matchedTrigger))
 
           event.channel.send(embded)
