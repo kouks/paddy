@@ -61,11 +61,3 @@ new Paddy().rise({
 import './app/modules/help'
 import './app/modules/startup'
 import './app/modules/birthdays'
-
-// import './app/modules/joinables'
-// import './app/modules/rivens'
-
-// Logger
-// Analyzer?
-// Response templates in annotation?
-// Tokens for API.

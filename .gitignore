@@ -3,6 +3,7 @@ node_modules/
 types/
 dist/
 artifacts/
+bin/
 
 # Editors
 .vscode
@@ -21,6 +22,7 @@ coverage/
 
 # Environment
 .env
+.env.prod
 
 # Database
 database

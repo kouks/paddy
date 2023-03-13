@@ -6,23 +6,12 @@ import { Binding, Param } from '@exteranto/core'
 
 @Binding
 export class HelpBuilder {
-  /**
-   * The primary command trigger.
-   */
   @Param('app.events.message.trigger')
   private primaryTrigger: string
 
-  /**
-   * The bot name.
-   */
   @Param('app.bot.name')
   private botName: string
 
-  /**
-   * Build a commands summary.
-   *
-   * @return The embed to be sent
-   */
   public buildSummary(): MessageEmbed {
     const embed: MessageEmbed = new MessageEmbed()
       .setColor(colors.primary)
@@ -42,12 +31,6 @@ export class HelpBuilder {
     return embed
   }
 
-  /**
-   * Build a help embed for a command.
-   *
-   * @param command The command to build help embed for
-   * @return The embed to be sent
-   */
   public buildForCommand(command: CommandTemplate): MessageEmbed {
     if (command === undefined || command.hidden) {
       return new MessageEmbed().setColor(colors.red).setTitle('Error').setDescription('Command not found.')

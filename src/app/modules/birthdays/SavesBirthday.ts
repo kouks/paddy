@@ -24,9 +24,6 @@ export class SavesBirthday implements MessageListener {
   @Param('app.modules.birthdays.dateFormat')
   private dateFormat: string
 
-  /**
-   * {@inheritdoc}
-   */
   public async handle(message: Message, parameters: SavesBirthdayParameters): Promise<void> {
     // Get the weapon name.
     const date = dayjs(parameters.date)
@@ -42,8 +39,6 @@ export class SavesBirthday implements MessageListener {
     })
 
     // Send the embed and delete the message that was sent.
-    await message.channel.send(birthdaySavedResponse(message.member, date.format(this.dateFormat)))
-
-    return void message.delete()
+    return void message.channel.send(birthdaySavedResponse(message.member, date.format(this.dateFormat)))
   }
 }

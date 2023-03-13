@@ -4,19 +4,9 @@ import { CommandNotMatchedException, ParameterMissingException } from './excepti
 
 @Singleton
 export class CommandParser {
-  /**
-   * The primary command trigger.
-   */
   @Param('app.events.message.trigger')
   private primaryTrigger: string
 
-  /**
-   * Parse a command based on the provided template and message.
-   *
-   * @param template The command template
-   * @param message The message to be parsed
-   * @return The parsed object
-   */
   public parse(template: CommandTemplate, message: string): any {
     const matchedTrigger: string = template.triggers.find((t) =>
       new RegExp(`^\\${this.primaryTrigger}${t}(\\s|$)`).test(message)

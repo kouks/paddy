@@ -9,22 +9,9 @@ import { ParameterMissingException } from 'lib/services/exceptions'
 import { Client, Message, MessageEmbed, PermissionResolvable } from 'discord.js'
 
 export interface MessageListener {
-  /**
-   * Message event handler.
-   *
-   * @param event The event to be handled
-   * @param parameters The parameters provided to the message
-   */
   handle(event: Message, parameters: any): Promise<void>
 }
 
-/**
- * The @OnMessage annotation serves to mark a class as a listener to the message
- * discord event.
- *
- * @param template The message command template
- * @return The annotation
- */
 export function OnMessage<T extends MessageListener>(template: CommandTemplate): ClassAnnotation<T> {
   CommandBag.add(template)
 
@@ -60,12 +47,6 @@ export function OnMessage<T extends MessageListener>(template: CommandTemplate):
   }
 }
 
-/**
- * The @Needs annotation checks user permissions to access a given function.
- *
- * @param permissions The array of permissions needed.
- * @return The annotation
- */
 export function Needs(permissions: PermissionResolvable[]): MethodAnnotation {
   return (target, method, descriptor) => {
     descriptor.value = new Proxy(target[method], {

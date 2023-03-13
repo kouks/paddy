@@ -19,15 +19,9 @@ import { OnMessage, MessageListener } from 'lib/listeners/Message'
   ],
 })
 export class SendsCommandHelp implements MessageListener {
-  /**
-   * The help embed builder service.
-   */
   @Autowired
   private helpBuilder: HelpBuilder
 
-  /**
-   * {@inheritdoc}
-   */
   public async handle(message: Message, parameters: SendsCommandHelpParameters): Promise<void> {
     // Get the command name.
     const commandName: string = parameters.command

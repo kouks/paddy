@@ -3,18 +3,9 @@ import { ClassAnnotation } from '../types'
 import { Class, Container } from '@exteranto/core'
 
 export interface ReadyListener {
-  /**
-   * Ready event handler.
-   */
   handle(discord: Client): Promise<void>
 }
 
-/**
- * The @OnReady annotation serves to mark a class as a listener to the ready
- * discord event.
- *
- * @return The annotation
- */
 export function OnReady<T extends ReadyListener>(): ClassAnnotation<T> {
   return (Constructor: Class<T>) => {
     const container: Container = Container.getInstance()
