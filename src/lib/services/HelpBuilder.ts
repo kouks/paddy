@@ -16,7 +16,7 @@ export class HelpBuilder {
     const embed: MessageEmbed = new MessageEmbed()
       .setColor(colors.primary)
       .setTitle(`${this.botName} Help`)
-      .setDescription(`Type \`${this.primaryTrigger}help [command]\` to get a detailed command summary.`)
+      .setDescription(`Type \`${this.primaryTrigger}help <command>\` to get a detailed command summary.`)
 
     const commands: string[] = CommandBag.all()
       .filter((command) => !command.hidden)
@@ -41,7 +41,11 @@ export class HelpBuilder {
       .setTitle('Command Structure')
       .setDescription(command.description)
 
-    embed.addField('Triggers', command.triggers.map((t) => `\`${this.primaryTrigger}${t}\``).join('\n'))
+    const parameters = command.parameters
+      .map((p) => `${p.optional ? '[' : '<'}${p.name}${p.optional ? ']' : '>'}`)
+      .join(' ')
+
+    embed.addField('Triggers', command.triggers.map((t) => `\`${this.primaryTrigger}${t} ${parameters}\``).join('\n'))
 
     embed.addField('Examples', command.examples.map((e) => `\`${this.primaryTrigger}${e}\``).join('\n'))
 

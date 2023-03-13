@@ -5,7 +5,6 @@ import { CommandBag } from '../services/CommandBag'
 import { HelpBuilder } from '../services/HelpBuilder'
 import { CommandParser } from '../services/CommandParser'
 import { ClassAnnotation, MethodAnnotation } from '../types'
-import { ParameterMissingException } from 'lib/services/exceptions'
 import { Client, Message, MessageEmbed, PermissionResolvable } from 'discord.js'
 import { isHelpableException } from 'helpers/exceptions'
 
