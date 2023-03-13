@@ -29,3 +29,21 @@ export const saveBirthdayToDatabase = async (memberId: string, day: number, mont
     }
   )
 }
+
+export const getBirthdaysForDay = async (day: number, month: number) => {
+  const db = await openDatabase()
+
+  const members = await db.all<{ memberId: string }[]>(
+    `
+      SELECT memberId
+      FROM birthdays
+      WHERE birthdays.day = :day AND birthdays.month = :month
+    `,
+    {
+      ':day': day,
+      ':month': month,
+    }
+  )
+
+  return members
+}

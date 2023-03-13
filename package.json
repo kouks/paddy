@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node .",
     "build": "tslint -p tsconfig.json -c tslint.json && ttsc -p tsconfig.json",
+    "build:start": "yarn build && yarn start",
     "test": "mocha test/setup.ts test/**/*.spec.ts -r ts-node/register -r tsconfig-paths/register",
     "coverage": "nyc npm run test"
   },
@@ -24,6 +25,7 @@
     "dayjs": "^1.11.7",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
+    "scheduler-ts": "^0.3.0",
     "sqlite": "^4.1.2",
     "sqlite3": "^5.1.4",
     "ts-transform-paths": "^3.0.0"

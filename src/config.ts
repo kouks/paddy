@@ -67,6 +67,8 @@ export default {
 
     birthdays: {
       dateFormat: 'D MMM',
+      serverId: '1083122914808836116',
+      roleId: '1084934579439276173',
     },
   },
 }

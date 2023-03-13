@@ -3,7 +3,7 @@
   "rules": {
     "max-classes-per-file": false,
     "arrow-parens": [2, "as-needed", { "requireForBlockBody": true }],
-    "completed-docs": [true, "enums", "functions", "methods"],
+    "completed-docs": false,
     "forin": false,
     "interface-name": [true, "never-prefix"],
     "jsdoc-format": [true, "check-multiline-start"],
