@@ -18,15 +18,15 @@ export default {
 
   bot: {
     version: '1.1.1',
-    name: 'Quack',
-    interactionChannelId: ['1083129253895360542'],
+    name: 'Wa',
+    interactionChannelId: [process.env.INTERACTION_CHANNEL_ID],
   },
 
   modules: {
     birthdays: {
       dateFormat: 'D MMM',
-      serverId: '1083122914808836116',
-      roleId: '1084934579439276173',
+      serverId: process.env.BIRTHDAYS_SERVER_ID,
+      roleId: process.env.BIRTHDAYS_CHANNEL_ID,
     },
   },
 }
