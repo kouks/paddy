@@ -21,9 +21,15 @@ export function OnMessage<T extends MessageListener>(template: CommandTemplate):
     const discord: Client = container.resolve(Client)
     const commandParser: CommandParser = container.resolve(CommandParser)
     const helpBuilder: HelpBuilder = container.resolve(HelpBuilder)
+    const interactionChannelIds: string[] = container.resolveParam('app.bot.interactionChannelId')
 
     discord.on('message', (event) => {
       try {
+        // Only interact in allowed channels.
+        if (!interactionChannelIds.includes(event.channel.id)) {
+          return
+        }
+
         const parameters: any = commandParser.parse(template, event.content)
 
         new Constructor().handle(event, parameters).catch((e) => {

@@ -1,5 +1,4 @@
 import { Message } from 'discord.js'
-import { Param } from '@exteranto/core'
 import { birthdaySavedResponse } from './templates'
 import { InvalidDateException } from './exceptions'
 import { SavesBirthdayParameters } from './types'
@@ -21,9 +20,6 @@ import { DatabaseException } from 'exceptions'
   ],
 })
 export class SavesBirthday implements MessageListener {
-  @Param('app.modules.birthdays.dateFormat')
-  private dateFormat: string
-
   public async handle(message: Message, parameters: SavesBirthdayParameters): Promise<void> {
     // Get the weapon name.
     const date = dayjs(parameters.date)
@@ -39,6 +35,8 @@ export class SavesBirthday implements MessageListener {
     })
 
     // Send the embed and delete the message that was sent.
-    return void message.channel.send(birthdaySavedResponse(message.member, date.format(this.dateFormat)))
+    await message.channel.send(birthdaySavedResponse(message.member))
+
+    return void message.delete()
   }
 }

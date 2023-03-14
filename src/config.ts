@@ -19,6 +19,7 @@ export default {
   bot: {
     version: '1.1.1',
     name: 'Quack',
+    interactionChannelId: ['1083129253895360542'],
   },
 
   modules: {
